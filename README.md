@@ -1,6 +1,6 @@
 # Netflix-like Movie Platform
 
-A modern, responsive movie platform built using NextJs, and Tailwind CSS.
+A modern, responsive movie platform built using Next.js, and Tailwind CSS.
 
 ## Features
 
