@@ -3,11 +3,11 @@ name: Deploy Frontend to GitHub Pages
 on:
   push:
     branches:
-      - dev-release
+      - dev-release  # Trigger deployment on push to the dev-release branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
 
     permissions:
       contents: write  # Allow write access to the repository
@@ -19,19 +19,16 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '18'  # Set the Node.js version
 
     - name: Install Dependencies
-      run: npm install
+      run: npm install  # Install dependencies
 
     - name: Build Project
-      run: npm run build
-
-    - name: Export Project to Static Files
-      run: npm run export  # Export the Next.js app to static files
+      run: npm run build  # Build the Next.js project, which includes the static export
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out  # Deploy the static files from the `out` folder
+        publish_dir: ./out  # The static files will be in the `out` directory
