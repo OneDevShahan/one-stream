@@ -25,10 +25,10 @@ jobs:
       run: npm install  # Install dependencies
 
     - name: Build Project
-      run: npm run build  # Build the Next.js project, which includes the static export
+      run: npm run build  # Build the Next.js project
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out  # The static files will be in the `out` directory
+        publish_dir: ./out  # Publish the static files from the `out` folder
