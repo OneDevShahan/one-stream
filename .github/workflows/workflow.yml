@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Allow write access to the repository
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
