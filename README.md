@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Netflix-like Movie Platform
 
-## Getting Started
+A modern, responsive movie platform built using NextJs, and Tailwind CSS.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **System-based Dark/Light Mode:** Automatically adapts to user preferences with a toggle button.
+2. **Dynamic Header:** Includes site name, Home, About, Contact, user profile, and favorites.
+3. **Footer:** Provides contact info, about section, and categorized links (e.g., Most Watched, Top 10).
+4. **Movie Cards:** Display poster, name, release year, and play button.
+5. **Horizontal Categories:** Movies displayed in rows for various categories.
+6. **Firestore Integration:** Free storage for movie data.
+7. **CI/CD with GitHub Actions:** Automated deployment to GitHub Pages and backend platforms.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend:** React, Tailwind CSS
+- **Deployment:** GitHub Pages, [Backend Platform]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+### Frontend
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/onedevshahan/one-stream.git
+   cd one-stream
+   npm install
+   npm start
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Build for production:
+   ```bash
+   npm run build
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Deploy using GitHub Actions.
 
-## Deploy on Vercel
+### Backend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Configure deployment using GitHub Actions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-branch-name`
+3. Commit your changes: `git commit -m 'Add a new feature'`
+4. Push to the branch: `git push origin feature-branch-name`
+5. Create a pull request.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+## Authors
+
+- **[Shahan Ahmad]** ([GitHub Profile](https://github.com/onedevshahan))

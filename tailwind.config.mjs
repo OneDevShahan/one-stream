@@ -1,17 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,mjs,jsx,ts,tsx}",
+    "./src/components/**/*.{js,mjs,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    extend: {},
   },
-  plugins: [],
+  darkMode: "class", // Enables class-based dark mode
+  plugins: [require("tailwind-scrollbar-hide")],
 };
