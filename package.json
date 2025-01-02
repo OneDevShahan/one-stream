@@ -1,7 +1,7 @@
 {
   "name": "one-stream",
   "version": "1.0.0",
-  "homepage": "https://OneDevShahan.github.io/one-stream",
+  "homepage": "one-stream",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
