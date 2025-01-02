@@ -52,6 +52,6 @@ A modern, responsive movie platform built using NextJs, and Tailwind CSS.
 
 This project is open-source and available under the [MIT License](LICENSE).
 
-## Authors
+## Author
 
 - **[Shahan Ahmad]** ([GitHub Profile](https://github.com/onedevshahan))
