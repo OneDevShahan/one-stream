@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://www.omdbapi.com/";
+const API_BASE_URL = process.env.NEXT_PUBLIC_OMDB_API_URL;
 
 export const fetchMovies = async (query) => {
   const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
