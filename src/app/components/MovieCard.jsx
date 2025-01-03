@@ -2,15 +2,27 @@ import Image from "next/image";
 import React from "react";
 
 const MovieCard = ({ movie }) => {
+
+  const isValidImageUrl = (url) => {
+    return (
+      url && url.startsWith("http") && /\.(jpg|jpeg|png|gif|webp)$/.test(url)
+    );
+  };
+
   return (
-    <div className="group relative bg-gray-200 dark:bg-black dark:text-white w-48 flex-shrink-0 rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-xl m-4">
+    <div className="group relative dark:bg-black dark:text-white w-48 flex-shrink-0 rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-xl m-4">
       {/* Poster Section */}
       <div className="relative h-64 w-full overflow-hidden">
         <Image
-          src={movie.src}
-          alt={movie.title}
+          src={
+            isValidImageUrl(movie.Poster) !== "N/A" &&
+            movie.Poster.startsWith("http")
+              ? movie.Poster
+              : `/No_Poster.png`
+          }
+          alt={movie.Title}
           layout="fill"
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
           className="transition-transform duration-300 group-hover:scale-110"
         />
         {/* Play Icon on Hover */}
@@ -29,19 +41,19 @@ const MovieCard = ({ movie }) => {
         </a>
       </div>
 
-      {/* Content Section */}
+      {/* Content Sectioa */}
       <div className="p-4 text-center">
         <a
           href="#"
           className="block text-lg font-semibold hover:text-red-500 transition-colors duration-300"
         >
-          {movie.title}
+          {movie.Title}
         </a>
         <a
           href="#"
           className="block text-sm text-gray-500 hover:text-red-400 transition-colors duration-300"
         >
-          {movie.releaseYear}
+          {movie.Year}
         </a>
       </div>
     </div>

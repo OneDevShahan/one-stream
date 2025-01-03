@@ -2,6 +2,7 @@ import { ThemeProvider } from "next-themes"; // Import ThemeProvider from next-t
 import Footer from "./components/Footer";
 import Header from "./components/Header"; // Assuming you have a Header component
 import "./globals.css";
+import SearchBar from "./components/SearchBar";
 
 export const metadata = {
   title: "OneStream",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         >
           {/* Ensure that "attribute='class'" is used to toggle the class on the root element */}
           <Header />
+          <SearchBar />
           <main>{children}</main>
           <Footer />
         </ThemeProvider>
