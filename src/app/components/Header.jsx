@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa"; // Import hamburger and close icons
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -91,7 +92,11 @@ const Header = () => {
           className="p-2 border rounded-md w-full text-center"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? "Close Menu" : "Open Menu"}
+          {menuOpen ? (
+            <FaTimes size={24} className="text-gray-700 dark:text-white" /> // Close icon
+          ) : (
+            <FaBars size={24} className="text-gray-700 dark:text-white" /> // Hamburger icon
+          )}
         </button>
         {menuOpen && (
           <nav className="flex flex-col items-center space-y-4 mt-4 text-sm font-medium">
