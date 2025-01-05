@@ -1,8 +1,8 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link"; // Use Link for navigation
 
 const MovieCard = ({ movie }) => {
-
+  console.log(movie.imdbID); // Log the imdbID to ensure it's correct
   const isValidImageUrl = (url) => {
     return (
       url && url.startsWith("http") && /\.(jpg|jpeg|png|gif|webp)$/.test(url)
@@ -20,7 +20,7 @@ const MovieCard = ({ movie }) => {
               ? movie.Poster
               : `/No_Poster.png`
           }
-          alt={movie.Title}
+          alt={movie.Title || "No Poster Available"}
           layout="fill"
           style={{ objectFit: "cover" }}
           className="transition-transform duration-300 group-hover:scale-110"
@@ -42,20 +42,20 @@ const MovieCard = ({ movie }) => {
         </a>
       </div>
 
-      {/* Content Sectioa */}
+      {/* Content Section */}
       <div className="p-4 text-center">
-        <a
-          href="#"
-          className="block text-lg font-semibold hover:text-red-500 transition-colors duration-300"
-        >
-          {movie.Title}
-        </a>
-        <a
-          href="#"
-          className="block text-sm text-gray-500 hover:text-red-400 transition-colors duration-300"
-        >
-          {movie.Year}
-        </a>
+        {/* Wrap the title with a Next.js Link */}
+        <Link href={`/movie/${movie.imdbID}`} passHref>
+          <div className="block text-lg font-semibold hover:text-red-500 transition-colors duration-300">
+            {movie.Title}
+          </div>
+        </Link>
+        {/* Wrap the year with a Next.js Link */}
+        <Link href={`/movie/${movie.imdbID}`} passHref>
+          <div className="block text-sm text-gray-500 hover:text-red-400 transition-colors duration-300">
+            {movie.Year}
+          </div>
+        </Link>
       </div>
     </div>
   );

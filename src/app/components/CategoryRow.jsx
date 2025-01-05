@@ -27,7 +27,20 @@ const CategoryRow = ({ title, movies, isLoading }) => {
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
 
       {isLoading ? (
-        <p className="text-center text-blue-500">Loading {title}...</p>
+        <p className="text-center text-blue-500">
+          <div className="flex justify-center items-center h-screen text-center">
+            <div className="space-y-4">
+              <div className="text-xl font-semibold">{title}</div>
+              <div className="text-xl font-semibold">
+                Grabbing popcorn... 🍿
+              </div>
+              <div className="w-16 h-16 border-4 border-t-4 border-gray-300 border-t-blue-500 rounded-full animate-spin mx-auto"></div>
+              <div className="text-lg">
+                We are preparing your movie experience...
+              </div>
+            </div>
+          </div>
+        </p>
       ) : movies.length === 0 ? (
         <p className="text-center text-gray-500">
           No movies available for {title}.

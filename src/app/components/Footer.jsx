@@ -21,7 +21,7 @@ const Footer = () => {
       name: "GitHub",
       icon: <FaGithub size={15} />,
       url: "https://github.com/OneDevShahan",
-      bgColor: "bg-gray-700 hover:bg-gray-800",
+      bgColor: "bg-gray-400 hover:bg-gray-800",
     },
     {
       name: "Twitter",

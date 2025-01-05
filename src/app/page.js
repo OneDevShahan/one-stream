@@ -25,7 +25,22 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-center dark:bg-gray-900 dark:text-white">
       <div className="w-full max-w-6xl px-4">
         {loading ? (
-          <div className="text-center text-lg">Loading Categories...</div>
+          <div className="text-center text-lg">
+            <div className="text-xl font-semibold">
+              Loading Categories... 🍿
+            </div>
+            <div className="flex justify-center items-center h-screen text-center">
+              <div className="space-y-4">
+                <div className="text-xl font-semibold">
+                  Grabbing popcorn... 🍿
+                </div>
+                <div className="w-16 h-16 border-4 border-t-4 border-gray-300 border-t-blue-500 rounded-full animate-spin mx-auto"></div>
+                <div className="text-lg">
+                  We are preparing your movie experience...
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
           <CategoryList />
         )}
