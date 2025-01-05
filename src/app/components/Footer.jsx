@@ -1,14 +1,47 @@
 "use client"; // Mark this component as a Client Component
 
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaEnvelope, FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    setData(new Date().toISOString()); // Example of dynamic content
+  }, []);
+
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      icon: <FaLinkedinIn size={15} />,
+      url: "https://www.linkedin.com/in/shahan-ahmad-5aa56b10a/",
+      bgColor: "bg-blue-500 hover:bg-blue-600",
+    },
+    {
+      name: "GitHub",
+      icon: <FaGithub size={15} />,
+      url: "https://github.com/OneDevShahan",
+      bgColor: "bg-gray-700 hover:bg-gray-800",
+    },
+    {
+      name: "Twitter",
+      icon: <FaTwitter size={15} />,
+      url: "https://x.com/shahanahmad7",
+      bgColor: "bg-blue-400 hover:bg-blue-500",
+    },
+    {
+      name: "Email",
+      icon: <FaEnvelope size={15} />,
+      url: "mailto:shahanahmad321@gmail.com",
+      bgColor: "bg-red-500 hover:bg-red-600",
+    },
+    {
+      name: "Instagram",
+      icon: <FaInstagram size={15} />,
+      url: "https://www.instagram.com/shahanahmad321/",
+      bgColor: "bg-pink-500 hover:bg-pink-600",
+    },
+  ];
 
   // Scroll to top function
   const scrollToTop = () => {
@@ -79,42 +112,18 @@ const Footer = () => {
 
       {/* Social Media Links */}
       <div className="container mx-auto flex justify-center gap-6 mt-6">
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-          className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-        >
-          <FaFacebookF size={20} />
-        </a>
-        <a
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Twitter"
-          className="text-gray-700 dark:text-gray-300 hover:text-blue-500"
-        >
-          <FaTwitter size={20} />
-        </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          className="text-gray-700 dark:text-gray-300 hover:text-pink-500"
-        >
-          <FaInstagram size={20} />
-        </a>
-        <a
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className="text-gray-700 dark:text-gray-300 hover:text-blue-700"
-        >
-          <FaLinkedinIn size={20} />
-        </a>
+        {socialLinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.name}
+            className={`text-gray-700 dark:text-gray-300 ${link.bgColor} p-3 rounded-full transition-all`}
+          >
+            {link.icon}
+          </a>
+        ))}
       </div>
 
       {/* Back to Top Button */}
@@ -129,7 +138,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="text-center mt-6 border-t border-gray-300 dark:border-gray-700 pt-4">
-        <p>© {currentYear} OneStream. All rights reserved.</p>
+        <p>© {data} OneStream. All rights reserved.</p>
       </div>
     </footer>
   );
