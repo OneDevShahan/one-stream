@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import CategoryRow from "./CategoryRow";
 
 const CategoryList = () => {
-  const [mostWatched, setMostWatched] = useState([]);
-  const [top10, setTop10] = useState([]);
-  const [suggested, setSuggested] = useState([]);
-  const [trending, setTrending] = useState([]);
+  const [categories, setCategories] = useState({
+    mostWatched: [],
+    top10: [],
+    suggested: [],
+    trending: [],
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -93,18 +95,19 @@ const CategoryList = () => {
       setError(null);
 
       try {
-        const [mostWatchedData, top10Data, suggestedData, trendingData] =
-          await Promise.all([
-            fetchMovies("Most Watched", movieCategories.mostWatched),
-            fetchMovies("Top 10", movieCategories.top10),
-            fetchMovies("Suggested", movieCategories.suggested),
-            fetchMovies("Trending", movieCategories.trending),
-          ]);
+        const categoryData = await Promise.all(
+          Object.entries(movieCategories).map(async ([key, movieNames]) => {
+            const movies = await fetchMovies(key, movieNames);
+            return { [key]: movies };
+          })
+        );
 
-        setMostWatched(mostWatchedData);
-        setTop10(top10Data);
-        setSuggested(suggestedData);
-        setTrending(trendingData);
+        const combinedData = categoryData.reduce(
+          (acc, category) => ({ ...acc, ...category }),
+          {}
+        );
+
+        setCategories(combinedData);
       } catch (err) {
         setError("An error occurred while fetching movies.");
       } finally {
@@ -118,18 +121,16 @@ const CategoryList = () => {
   return (
     <div className="space-y-12">
       {error && <p className="text-center text-red-500">{error}</p>}
-      <CategoryRow
-        title="Most Watched"
-        movies={mostWatched}
-        isLoading={loading}
-      />
-      <CategoryRow title="Top 10" movies={top10} isLoading={loading} />
-      <CategoryRow
-        title="Suggested for You"
-        movies={suggested}
-        isLoading={loading}
-      />
-      <CategoryRow title="Trending" movies={trending} isLoading={loading} />
+      {Object.entries(categories).map(([key, movies]) => (
+        <CategoryRow
+          key={key}
+          title={key
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (str) => str.toUpperCase())}
+          movies={movies}
+          isLoading={loading}
+        />
+      ))}
     </div>
   );
 };

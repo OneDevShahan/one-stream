@@ -17,19 +17,20 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo and Site Name */}
         <div className="flex items-center space-x-4">
-          {/* Clickable SVG Logo */}
           <Link href="/" className="flex items-center">
             <img
-              src="/Logo.svg" // Reference the logo file from the public folder
+              src="/Logo.svg"
               alt="Logo"
-              className="h-12 w-12 cursor-pointer"
+              className="h-10 w-10 cursor-pointer"
             />
-            <span className="text-2xl font-bold ml-2">OneStream</span>
+            <span className="text-lg md:text-2xl font-bold ml-2">
+              OneStream
+            </span>
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-6 text-sm md:text-base font-medium">
           <Link href="/" className="hover:underline">
             Home
           </Link>
@@ -42,28 +43,25 @@ const Header = () => {
         </nav>
 
         {/* User Profile & Theme Toggle */}
-        <div className="flex items-center space-x-6">
-          {/* Favorites Button */}
+        <div className="hidden md:flex items-center space-x-4">
           <button
-            className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300"
+            className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
             onClick={() => alert("Favorite List (Coming Soon!)")}
           >
             ❤️ Favorites
           </button>
 
-          {/* Theme Toggle */}
           <button
-            className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300"
+            className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
             onClick={toggleTheme}
           >
             {theme === "dark" ? "🌞 Light" : "🌙 Dark"}
           </button>
 
-          {/* Profile Dropdown */}
           <div className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300"
+              className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
             >
               👤
             </button>
@@ -88,15 +86,15 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden">
+      <div className="flex flex-col md:hidden p-4">
         <button
-          className="p-2 border w-full text-center"
+          className="p-2 border rounded-md w-full text-center"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? "Close Menu" : "Open Menu"}
         </button>
         {menuOpen && (
-          <nav className="flex flex-col items-center space-y-2 mt-2">
+          <nav className="flex flex-col items-center space-y-4 mt-4 text-sm font-medium">
             <Link href="/" className="hover:underline">
               Home
             </Link>
@@ -106,6 +104,27 @@ const Header = () => {
             <Link href="/contact" className="hover:underline">
               Contact
             </Link>
+
+            <button
+              className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
+              onClick={() => alert("Favorite List (Coming Soon!)")}
+            >
+              ❤️ Favorites
+            </button>
+
+            <button
+              className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
+              onClick={toggleTheme}
+            >
+              {theme === "dark" ? "🌞 Light" : "🌙 Dark"}
+            </button>
+
+            <button
+              className="p-2 border rounded-full dark:bg-gray-800 bg-gray-300 text-sm"
+              onClick={() => alert("Logging out...")}
+            >
+              👤 Logout
+            </button>
           </nav>
         )}
       </div>

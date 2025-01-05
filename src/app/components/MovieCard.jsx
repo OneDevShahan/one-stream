@@ -24,6 +24,7 @@ const MovieCard = ({ movie }) => {
           layout="fill"
           style={{ objectFit: "cover" }}
           className="transition-transform duration-300 group-hover:scale-110"
+          loading="lazy"
         />
         {/* Play Icon on Hover */}
         <a

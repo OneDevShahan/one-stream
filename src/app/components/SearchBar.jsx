@@ -12,6 +12,10 @@ const SearchBar = () => {
   const YOUR_OMDB_API_KEY = process.env.NEXT_PUBLIC_OMDB_API_KEY;
   const router = useRouter();
 
+  const NO_RESULTS_MESSAGE = "No results found.";
+  const API_ERROR_MESSAGE = "An error occurred while fetching the data.";
+  const API_SUCCESS_RESPONSE = "True";
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -25,13 +29,13 @@ const SearchBar = () => {
         );
         const data = await response.json();
 
-        if (data.Response === "True") {
+        if (data.Response === API_SUCCESS_RESPONSE) {
           setResults(data.Search); // Set results in state
         } else {
           setError(data.Error); // Handle error response
         }
       } catch (err) {
-        setError("An error occurred while fetching the data.");
+        setError(API_ERROR_MESSAGE); // Generic error message
       } finally {
         setLoading(false);
       }
@@ -39,9 +43,9 @@ const SearchBar = () => {
   };
 
   const handleClear = () => {
-    setSearchQuery("");  // Clear the search query
-    setResults([]);      // Clear the search results
-    setError(null);      // Reset the error state
+    setSearchQuery(""); // Clear the search query
+    setResults([]); // Clear the search results
+    setError(null); // Reset the error state
   };
 
   return (
@@ -59,6 +63,7 @@ const SearchBar = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full p-2 pr-10 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 
                      dark:bg-gray-700 bg-gray-200 dark:text-white text-black transition-transform transform hover:scale-105"
+            aria-label="Search for a movie"
           />
 
           {/* Conditional Icons */}
@@ -68,6 +73,7 @@ const SearchBar = () => {
               type="button"
               onClick={handleClear}
               className="absolute right-3 p-1 text-gray-500 dark:text-gray-300 hover:scale-125 transition-transform"
+              aria-label="Clear search"
             >
               ✖️
             </button>
@@ -76,6 +82,7 @@ const SearchBar = () => {
             <button
               type="submit"
               className="absolute right-3 p-1 bg-transparent text-gray-500 dark:text-gray-300 hover:scale-125 transition-transform"
+              aria-label="Search"
             >
               🔍
             </button>
@@ -86,6 +93,9 @@ const SearchBar = () => {
       {/* Display Loading or Error */}
       {loading && <p className="text-center text-blue-500">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
+      {results.length === 0 && !loading && !error && searchQuery.trim() && (
+        <p className="text-center text-gray-500">{NO_RESULTS_MESSAGE}</p>
+      )}
 
       {/* Display Results */}
       <div className="dark:bg-gray-900 dark:text-white mb-8">

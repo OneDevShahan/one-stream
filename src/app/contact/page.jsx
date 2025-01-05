@@ -9,6 +9,10 @@ const Contact = () => {
     message: "",
   });
 
+  const [error, setError] = useState(null); // Error state for validation
+  const [success, setSuccess] = useState(null); // Success state for submission feedback
+  const [loading, setLoading] = useState(false); // Loading state for form submission
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -17,25 +21,70 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    if (!formData.name || !formData.email || !formData.message) {
+      setError("All fields are required.");
+      return false;
+    }
+    setError(null); // Clear error if validation passes
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(
-      `Thank you for your message, ${formData.name}! We'll get back to you soon.`
-    );
-    setFormData({ name: "", email: "", message: "" });
+
+    if (!validateForm()) return; // Prevent submission if validation fails
+
+    setLoading(true);
+    setSuccess(null);
+    setError(null);
+
+    try {
+      // Simulate API submission (you can replace this with actual API logic)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setSuccess(
+        `Thank you for your message, ${formData.name}! We'll get back to you soon.`
+      );
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="dark:bg-gray-900 text-black dark:text-white min-h-screen flex items-center">
       <div className="container mx-auto p-4 sm:p-6 md:p-8">
-        <h1 className="text-2xl font-bold sm:text-4xl md:text-5xl mb-6 text-center">
+        <h1 className="text-2xl font-bold mb-6 text-center">
           Contact Us
         </h1>
-        <p className="text-lg md:text-xl mb-6 text-center">
+        <p className="text-lg mb-6 text-center">
           Have questions, feedback, or suggestions? We'd love to hear from you.
           Fill out the form below, and we'll get back to you as soon as
           possible.
         </p>
+
+        {/* Error/Success Message */}
+        {error && (
+          <div
+            className="mb-4 text-red-500 text-center"
+            role="alert"
+            aria-live="assertive"
+          >
+            {error}
+          </div>
+        )}
+        {success && (
+          <div
+            className="mb-4 text-green-500 text-center"
+            role="alert"
+            aria-live="assertive"
+          >
+            {success}
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className="space-y-4 md:space-y-6 max-w-lg mx-auto"
@@ -93,9 +142,14 @@ const Contact = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-all"
+            className={`w-full px-4 py-2 rounded transition-all ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+            }`}
+            disabled={loading}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>
