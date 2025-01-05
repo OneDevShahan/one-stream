@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import MovieCard from "./MovieCard";
 
 const CategoryRow = ({ title, movies, isLoading }) => {
@@ -27,12 +28,15 @@ const CategoryRow = ({ title, movies, isLoading }) => {
         </p>
       ) : (
         <div className="relative">
+          {/* Left Arrow Button */}
           <button
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 z-10"
             onClick={scrollLeft}
           >
-            &#8592; {/* Replace with an icon */}
+            <IoIosArrowDropleft size={24} />
           </button>
+
+          {/* Scrollable Movies Container */}
           <div
             ref={scrollContainerRef}
             className="flex overflow-x-scroll gap-4 scrollbar-hide scroll-smooth"
@@ -41,11 +45,13 @@ const CategoryRow = ({ title, movies, isLoading }) => {
               <MovieCard key={index} movie={movie} />
             ))}
           </div>
+
+          {/* Right Arrow Button */}
           <button
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 z-10"
             onClick={scrollRight}
           >
-            &#8594; {/* Replace with an icon */}
+            <IoIosArrowDropright size={24} />
           </button>
         </div>
       )}
